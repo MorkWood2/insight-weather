@@ -1,8 +1,29 @@
-const endPoint =
-  'https://mars.nasa.gov/rss/api/?feed=weather&category=insight&feedtype=json&ver=1.0';
+//get long and lat from our location
 
-const insightData = [];
+window.addEventListener('load', () => {
+  let long;
+  let lat;
+  let temperatureDescription = document.querySelector(
+    '.temperature-description'
+  );
 
-fetch(endPoint)
-  .then(res => res.json())
-  .then(data => console.log(data));
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      long = position.coords.longitude;
+      lat = position.coords.latitude;
+
+      const proxy = 'https://cors-anywhere.herokuapp.com/';
+      const api = `${proxy}https://api.darksky.net/forecast/06ffb973457f285ab784e46b701e2b15/${lat},${long}`;
+
+      fetch(api)
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          console.log(data);
+          //es6 destructure
+          const { temperature, summary } = data.currently;
+        });
+    });
+  }
+});
