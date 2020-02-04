@@ -28,17 +28,17 @@ body {
   flex-direction: column;
 }
 
-.degree-section {
+.temp-container {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-.degree-section span {
+.temp-container span {
   margin: 10px;
   font-size: 30px;
 }
 
-.degree-section h2 {
+.temp-container h2 {
   font-size: 40px;
 }
